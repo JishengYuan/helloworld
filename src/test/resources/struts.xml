@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	
+	<constant name="struts.convention.action.disableJarScanning" value="true" />
+	<constant name="struts.convention.action.includeJars" value=".*/sinobridge-eoss-bpm-0.0.1-SNAPSHOT.*?jar(!/)?" />
+	
+	<!-- 最大值是100MB -->
+	<constant name="struts.multipart.maxSize" value="104857600" />
+	<constant name="struts.multipart.parser" value="jakarta" />
+	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
+	<constant name="struts.devMode" value="false"></constant><!-- 开发时为true，应用时为false -->
+
+	<constant name="struts.convention.result.path" value="/views/" />
+	<!-- struts2自动扫描此包下所有类为action类 ，struts2注解开发必须用,多个包之间用(，)分割 -->
+	<constant name="struts.convention.action.packages"
+		value="com.sinobridge.eoss.bpm.web.action" />
+
+	<constant name="struts.convention.action.name.separator" value="-" />
+
+
+	<package name="form" extends="default" namespace="/form">
+		<action name="download"
+			class="com.sinobridge.eoss.bpm.web.action.form.FileDownloadAction">
+			<!--  <param name="fileName"></param>-->
+			<result name="success" type="stream">
+				<param name="contentType">
+					application/octet-stream;charset=ISO8859-1
+				</param>
+				<param name="inputName">targetFile</param>
+				<param name="bufferSize">4096</param>
+				<param name="contentDisposition">
+					attachment;filename="${downloadChineseFileName}"
+				</param>
+			</result>
+		</action>
+		<action name="expform"
+			class="com.sinobridge.eoss.bpm.web.action.form.ExportFormAction">
+			<result name="success" type="stream">
+				<param name="contentType">
+					application/octet-stream;charset=ISO8859-1
+				</param>
+				<param name="inputName">targetFile</param>
+				<param name="bufferSize">4096</param>
+				<param name="contentDisposition">
+					attachment;filename="${downloadChineseFileName}"
+				</param>
+			</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services-config>
+	<services>
+		<service id="remoting-service" class="flex.messaging.services.RemotingService">
+			<default-channels>
+				<channel ref="my-amf" />
+			</default-channels>
+			<adapters>
+				<adapter-definition id="java-object"
+					class="flex.messaging.services.remoting.adapters.JavaAdapter"
+					default="true" />
+			</adapters>
+			<!-- 流程相关 -->
+			<destination id="process">
+				<properties>
+					<factory>springFactory</factory>
+					<!-- spring bean id -->
+					<source>procDesignService</source>
+				</properties>
+			</destination>
+			<!-- 表单相关 -->
+			<destination id="formBlazeDest">
+				<properties>
+					<factory>springFactory</factory>
+					<!-- spring bean id -->
+					<source>formBlazeDest</source>
+				</properties>
+			</destination>
+		</service>
+	</services>
+
+	<factories>
+		<factory id="springFactory"
+			class="com.sinobridge.eoss.bpm.common.util.spring.SpringFlexFactory" />
+	</factories>
+
+	<channels>
+		<channel-definition id="my-streaming-amf"
+			class="mx.messaging.channels.StreamingAMFChannel">
+			<endpoint
+				url="http://{server.name}:{server.port}/{context.root}/messagebroker/streamingamf"
+				class="flex.messaging.endpoints.StreamingAMFEndpoint" />
+			<properties>
+				<max-streaming-clients>100</max-streaming-clients>
+				<idle-timeout-minutes>0</idle-timeout-minutes>
+			</properties>
+		</channel-definition>
+
+		<channel-definition id="my-amf"
+			class="mx.messaging.channels.AMFChannel">
+			<endpoint
+				url="http://{server.name}:{server.port}/{context.root}/messagebroker/amf"
+				class="flex.messaging.endpoints.AMFEndpoint" />
+			<properties>
+				<polling-enabled>false</polling-enabled>
+			</properties>
+		</channel-definition>
+	</channels>
+
+	<logging>
+		<target class="flex.messaging.log.ConsoleTarget" level="error">
+			<properties>
+				<prefix>[BlazeDS]</prefix>
+				<includeDate>false</includeDate>
+				<includeTime>false</includeTime>
+				<includeLevel>true</includeLevel>
+				<includeCategory>true</includeCategory>
+			</properties>
+			<filters>
+				<pattern>Endpoint.*</pattern>
+				<pattern>Service.*</pattern>
+				<pattern>Configuration</pattern>
+			</filters>
+		</target>
+	</logging>
+
+</services-config>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache name="cacheManager">
+
+	<defaultCache maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+		diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000000"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120" />
+
+	<cache name="sysDomain" maxElementsInMemory="5000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LRU">
+	</cache>
+	<cache name="systemUser" maxElementsInMemory="5000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LRU">
+	</cache>
+</ehcache>

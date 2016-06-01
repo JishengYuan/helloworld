@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<alarm>
+	<modes>
+		<mode id="2" name="邮件" type="com.sinobridge.eoss.bpm.engine.notify.impl.MailNotifyModeImpl" />
+		<mode id="1" name="短信" type="com.sinobridge.eoss.bpm.engine.notify.impl.SmsNotifyModeImpl" />
+		<mode id="4" name="站内信" type="com.sinobridge.eoss.bpm.engine.notify.impl.MessageNotifyModeImpl" />
+	</modes>
+</alarm>
